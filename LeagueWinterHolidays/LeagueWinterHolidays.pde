@@ -1,5 +1,6 @@
 SnowMan snowman;
-
+Snowfall snowfall;
+Snowflakes snowflakes;
 // 1. Declare a PImage variable for the background. Don't initialize it!
 PImage back;
 void setup(){
@@ -7,17 +8,19 @@ void setup(){
 size(800, 600);
   // 3. Set your PImage variable to the output of the
   //    loadImage() method with "snowBg.jpg" as an input
-back = loadImage("snowBg.gif");
+back = loadImage("snowBg.jpeg");
   // 4. Call your PImage's resize() method with your width and height
 back.resize(800, 600);
   // 5. Set the snowman variable to a new SnowMan()
 snowman = new SnowMan();
+snowfall = new Snowfall();
+snowflakes = new Snowflakes(true);
 }
 
 void draw(){
   // 6. Call the background() method to display your background image 
 fill(#818181);
-background(#818181);
+background(back);
 
   // 7. Call the snow man's drawBody() method
 snowman.drawBody();
@@ -30,7 +33,7 @@ snowman.drawBody();
 if (mousePressed){
 System.out.println(mouseX);
 System.out.println(mouseY + "\n");
-delay(1000);
+
 }
 fill(#000000);
 ellipse(358, 144, 25, 25);
@@ -53,14 +56,14 @@ ellipse(400, 350, 10, 10);
 ellipse(400, 380, 10, 10);
 fill(#9B5E02);
 
-line(205, 234, 300, 265);
+/*line(205, 234, 300, 265);
 line(205, 234, 177, 243);
 line(205, 234, 205, 215);
 line(205, 234, 190, 230);
 //snowman.drawHat();
 rect(500, 290, 10, 10);
-line(530, 350, 500, 290);
-//snowman.drawArms();
+line(530, 350, 500, 290);*/
+snowman.drawArms();
 
 
   // 10. Create an object of the Snowfall class in setup
@@ -68,17 +71,19 @@ line(530, 350, 500, 290);
   
   // 11. Call the Snowfall object's draw() method.
   //     Do you see snow falling when you run the code?
-
+snowfall.draw();
   // 12. Create an object of the Snowflakes class in setup
   //     similar to the SnowMan obect from 5.
-  
+  snowflakes.draw();
   // 13. Call the Snowflakes object's draw() method.
   //     Do you see snowflakes falling when you run the code?
 
  
+snowfall.setWind(true);
+snowfall.addSnow(1000000000);
 
-  
-  
+//snowfall.setSnowColor(#FAEA5B);
+
   // EXTRA:
   // * See if you can figure out how to add wind to the falling snow
   // * See if you can figure out hwo to make the snowflakes sparkle

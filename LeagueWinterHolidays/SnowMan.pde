@@ -22,7 +22,7 @@ public class SnowMan {
     this.scale = height / 800.0;    // scale 1 for height = 800
     this.x = width/2;  // centered
     this.y = height;   // bottom of screen
-    this.bodyColor = color(#FFFFFF);
+    this.bodyColor = color(#FAEA5B);
     this.inverted = color(255 - red(bodyColor), 255 - green(bodyColor), 255 - blue(bodyColor));
   }
   
@@ -136,7 +136,7 @@ public class SnowMan {
     
     stroke(#4C322B);
     strokeWeight(armWidth);
-    strokeCap(ROUND);
+    strokeCap(SQUARE);
 
     // Left arm angle and lengths
     float thetaL = atan( abs(mouseY - armY) / abs(mouseX - leftArmX) );
@@ -159,11 +159,26 @@ public class SnowMan {
     line(leftArmX, armY , leftArmX + leftHandX, armY + leftHandY); 
     line(rightArmX, armY , rightArmX + rightHandX, armY + rightHandY);
     
+    // Draw left hand fingers
+    strokeWeight(5);
+    
+       float leftfingerx = leftArmX + leftHandX;
+   float leftfingery = armY + leftHandY;
+   
+    line(leftfingerx, leftfingery, leftfingerx -20, leftfingery - 20);
+    
+
+   //line();
+    //line();
+    
     if( mousePressed ){
       // Build an increasingly large snowball when pressing the mouse
-      
-      snowballSize++;
-      
+      fill(#E0FFFB);
+      stroke(#7CE3D4);
+   /*for(int i = 1; i > 0; i++){
+    snowballSize =+ 2; 
+   }*/
+   snowballSize++;
       strokeWeight(3);
       stroke(0);
       snowballThrowX = mouseX;
@@ -177,6 +192,7 @@ public class SnowMan {
         
         strokeWeight(3);
         stroke(0);
+        fill(#E0FFFB);
         circle( snowballX, snowballY, snowballSize);
         
         if( snowballX < 0 || snowballX > width || snowballY < 0 || snowballY > height ){
@@ -191,6 +207,8 @@ public class SnowMan {
           float snowballIncY = ( snowballThrowY > armY ) ? 10 * sin(thetaS) : -10 * sin(thetaS);
           snowballX += snowballIncX;
           snowballY += snowballIncY;
+          snowballSize--;
+        
         }
       }
     }
